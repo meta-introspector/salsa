@@ -30,7 +30,7 @@ tracing = { version = "0.1", default-features = false, features = ["std"] }
 inventory = { version = "0.3.20", optional = true }
 
 # parallel map
-rayon = { version = "1.10.0", optional = true }
+rayon  = { workspace=true, optional=true } #  { version = "1.10.0", optional = true }
 
 # Stuff we want Update impls for by default
 compact_str = { version = "0.9", optional = true }
@@ -106,12 +106,12 @@ required-features = ["accumulator"]
 name = "calc"
 required-features = ["accumulator"]
 
-[workspace]
-members = ["components/salsa-macro-rules", "components/salsa-macros"]
+#[workspace]
+#members = ["components/salsa-macro-rules", "components/salsa-macros"]
 
-[workspace.package]
-authors = ["Salsa developers"]
-edition = "2021"
-license = "Apache-2.0 OR MIT"
-repository = "https://github.com/salsa-rs/salsa"
-rust-version = "1.85"
+#[workspace.package]
+#authors = ["Salsa developers"]
+#edition = "2021"
+#license = "Apache-2.0 OR MIT"
+#repository = "https://github.com/salsa-rs/salsa"
+#rust-version = "1.85"
