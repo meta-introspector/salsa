@@ -11,7 +11,7 @@ use crate::sync::thread::ThreadId;
 use crate::sync::MutexGuard;
 use crate::tracing;
 
-type QueryDependents = FxHashMap<DatabaseKeyIndex, SmallVec<[ThreadId; 4]>>;
+type QueryDependents = FxHashMap<DatabaseKeyIndex, SmallVec<ThreadId, 4>>;
 type TransferredDependents = FxHashMap<DatabaseKeyIndex, SmallSet<DatabaseKeyIndex, 4>>;
 
 #[derive(Debug, Default)]
@@ -484,14 +484,14 @@ impl Edges {
 }
 
 #[derive(Debug)]
-struct SmallSet<T, const N: usize>(SmallVec<[T; N]>);
+struct SmallSet<T, const N: usize>(SmallVec<T, N>);
 
 impl<T, const N: usize> SmallSet<T, N>
 where
     T: PartialEq,
 {
     const fn new() -> Self {
-        Self(SmallVec::new_const())
+        Self(SmallVec::new())
     }
 
     fn push(&mut self, value: T) {
@@ -520,7 +520,7 @@ where
 
 impl<T, const N: usize> IntoIterator for SmallSet<T, N> {
     type Item = T;
-    type IntoIter = smallvec::IntoIter<[T; N]>;
+    type IntoIter = smallvec::IntoIter<T, N>;
 
     fn into_iter(self) -> Self::IntoIter {
         self.0.into_iter()

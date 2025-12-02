@@ -206,13 +206,12 @@ where
     }
 }
 
-unsafe impl<A> Update for smallvec::SmallVec<A>
+unsafe impl<T, const N: usize> Update for smallvec::SmallVec<T, N>
 where
-    A: smallvec::Array,
-    A::Item: Update,
+    T: Update,
 {
     unsafe fn maybe_update(old_pointer: *mut Self, new_vec: Self) -> bool {
-        maybe_update_vec!(old_pointer, new_vec, A::Item)
+        maybe_update_vec!(old_pointer, new_vec, T)
     }
 }
 

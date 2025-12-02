@@ -12,7 +12,7 @@ use crate::sync::thread;
 use crate::tracked_struct::Identity;
 use crate::zalsa::{MemoIngredientIndex, Zalsa};
 use crate::zalsa_local::{ActiveQueryGuard, QueryRevisions};
-use crate::{tracing, Cancelled, Cycle};
+use crate::{Cancelled, Cycle, tracing};
 use crate::{DatabaseKeyIndex, Event, EventKind, Id};
 
 impl<C> IngredientImpl<C>
@@ -146,11 +146,7 @@ where
             memo_ingredient_index,
         );
 
-        if claim_guard.drop() {
-            None
-        } else {
-            Some(memo)
-        }
+        if claim_guard.drop() { None } else { Some(memo) }
     }
 
     fn execute_maybe_iterate<'db>(
@@ -187,7 +183,9 @@ where
                 // b) It's guaranteed that this query will panic again anyway.
                 // That's why we simply propagate the panic here. It simplifies our lives and it also avoids duplicate panic messages.
                 if old_memo.value.is_none() {
-                    tracing::warn!("Propagating panic for cycle head that panicked in an earlier execution in that revision");
+                    tracing::warn!(
+                        "Propagating panic for cycle head that panicked in an earlier execution in that revision"
+                    );
                     Cancelled::PropagatedPanic.throw();
                 }
 
@@ -241,8 +239,8 @@ where
                 break (new_value, completed_query);
             }
 
-            let mut missing_heads: SmallVec<[(DatabaseKeyIndex, IterationCount); 1]> =
-                SmallVec::new_const();
+            let mut missing_heads: SmallVec<(DatabaseKeyIndex, IterationCount), 1> =
+                SmallVec::new();
             let mut max_iteration_count = iteration_count;
             let mut depends_on_self = false;
 
@@ -388,7 +386,10 @@ where
             let new_cycle_heads = active_query.take_cycle_heads();
             for head in new_cycle_heads {
                 if !cycle_heads.contains(&head.database_key_index) {
-                    panic!("Cycle recovery function for {database_key_index:?} introduced a cycle, depending on {:?}. This is not allowed.", head.database_key_index);
+                    panic!(
+                        "Cycle recovery function for {database_key_index:?} introduced a cycle, depending on {:?}. This is not allowed.",
+                        head.database_key_index
+                    );
                 }
             }
 
