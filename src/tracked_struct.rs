@@ -680,8 +680,8 @@ where
             let swapped_out = data.updated_at.swap(None);
             if swapped_out != last_updated_at {
                 panic!(
-                "failed to acquire write lock, id `{id:?}` must have been leaked across threads"
-            );
+                    "failed to acquire write lock, id `{id:?}` must have been leaked across threads"
+                );
             }
         }
 
@@ -1262,7 +1262,7 @@ mod persistence {
     use std::fmt;
 
     use serde::ser::{SerializeMap, SerializeStruct};
-    use serde::{de, Deserialize};
+    use serde::{Deserialize, de};
 
     use super::{Configuration, IngredientImpl, Value};
     use crate::plumbing::Ingredient;

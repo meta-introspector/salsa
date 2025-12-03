@@ -1,5 +1,6 @@
 use std::marker::PhantomData;
 
+use crate::Id;
 use crate::function::{VerifyCycleHeads, VerifyResult};
 use crate::hash::{FxHashSet, FxIndexSet};
 use crate::ingredient::Ingredient;
@@ -8,7 +9,6 @@ use crate::table::memo::MemoTableTypes;
 use crate::tracked_struct::{Configuration, Value};
 use crate::zalsa::{IngredientIndex, JarKind, Zalsa};
 use crate::zalsa_local::QueryEdge;
-use crate::Id;
 
 /// Created for each tracked struct.
 ///

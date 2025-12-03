@@ -307,11 +307,7 @@ impl<'db> Parser<'_, 'db> {
             self.consume(ch);
         }
 
-        if s.is_empty() {
-            None
-        } else {
-            Some(s)
-        }
+        if s.is_empty() { None } else { Some(s) }
     }
 
     /// Parses a number.

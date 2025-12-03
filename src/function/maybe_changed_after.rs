@@ -155,7 +155,7 @@ where
                     zalsa_local,
                     database_key_index,
                     cycle_heads,
-                ))
+                ));
             }
         };
         // Load the current memo, if any.

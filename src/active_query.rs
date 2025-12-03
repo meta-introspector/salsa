@@ -1,9 +1,10 @@
 use std::{fmt, mem, ops};
 
+use crate::Revision;
 #[cfg(feature = "accumulator")]
 use crate::accumulator::{
-    accumulated_map::{AccumulatedMap, AtomicInputAccumulatedValues, InputAccumulatedValues},
     Accumulator,
+    accumulated_map::{AccumulatedMap, AtomicInputAccumulatedValues, InputAccumulatedValues},
 };
 use crate::hash::FxIndexSet;
 use crate::key::DatabaseKeyIndex;
@@ -11,10 +12,9 @@ use crate::runtime::Stamp;
 use crate::sync::atomic::AtomicBool;
 use crate::tracked_struct::{Disambiguator, DisambiguatorMap, IdentityHash, IdentityMap};
 use crate::zalsa_local::{QueryEdge, QueryOrigin, QueryRevisions, QueryRevisionsExtra};
-use crate::Revision;
 use crate::{
-    cycle::{CycleHeads, IterationCount},
     Id,
+    cycle::{CycleHeads, IterationCount},
 };
 use crate::{durability::Durability, tracked_struct::Identity};
 

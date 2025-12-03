@@ -9,11 +9,11 @@ use thin_vec::ThinVec;
 
 #[cfg(feature = "accumulator")]
 use crate::accumulator::{
-    accumulated_map::{AccumulatedMap, AtomicInputAccumulatedValues},
     Accumulator,
+    accumulated_map::{AccumulatedMap, AtomicInputAccumulatedValues},
 };
 use crate::active_query::{CompletedQuery, QueryStack};
-use crate::cycle::{empty_cycle_heads, AtomicIterationCount, CycleHeads, IterationCount};
+use crate::cycle::{AtomicIterationCount, CycleHeads, IterationCount, empty_cycle_heads};
 use crate::durability::Durability;
 use crate::key::DatabaseKeyIndex;
 use crate::runtime::Stamp;
