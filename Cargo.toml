@@ -19,12 +19,13 @@ hashbrown = "0.15"
 hashlink = "0.10"
 indexmap = "2"
 intrusive-collections = "0.9.7"
-parking_lot = "0.12"
+#parking_lot = "0.12"
+parking_lot = {workspace=true}
 portable-atomic = "1"
 rustc-hash = "2"
-smallvec = { version = "1", features = ["const_new"] }
+smallvec = { workspace = true }
 thin-vec = { version = "0.2.14" }
-tracing = { version = "0.1", default-features = false, features = ["std"] }
+tracing = { version = "0.1", features = ["std"] }
 
 # Automatic ingredient registration.
 inventory = { version = "0.3.20", optional = true }
@@ -67,14 +68,14 @@ salsa-macros = { version = "=0.24.0", path = "components/salsa-macros" }
 [dev-dependencies]
 # examples
 crossbeam-channel = "0.5.15"
-dashmap = { version = "6", features = ["raw-api"] }
+dashmap = { workspace=true, features = ["raw-api"] }
 eyre = "0.6.12"
 notify-debouncer-mini = "0.4.1"
 ordered-float = "5.0.0"
 
 # tests/benches
 annotate-snippets = "0.11.5"
-codspeed-criterion-compat = { version = "3.0.5", default-features = false }
+codspeed-criterion-compat = { version = "3.0.5" }
 expect-test = "1.5.1"
 rustversion = "1.0"
 test-log = { version = "0.2.18", features = ["trace"] }
